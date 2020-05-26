@@ -18,23 +18,12 @@ back_9_custom = custom_data['back_9_handicaps']
 
 <!DOCTYPE html>
 <html lang="en">
-% from HEAD import HTML_HEAD
-{{!HTML_HEAD}}
+% from HTML import HEAD
+{{!HEAD}}
 <body>
     <div class="page-container">
-        <nav class="navbar navbar-default navbar-fixed-top shadow wbycNav">
-            <div class="container pl-0">
-                <div class="navbar-header">
-                    <a class="d-none d-md-inline pl-3 py-3 logo-full" href="https://www.wbyc.com/" tabindex="0">
-                        <img src="/static/images/logo_full.png" srcset="/static/images/logo_full-2x.png 2x" alt="White Bear Yacht Club">
-                    </a>
-                    <a class="d-md-none logo-mobile" href="https://www.wbyc.com/" tabindex="0">
-                        <img src="/static/images/flag_accent.png" srcset="/static/images/flag_accent-2x.png 2x" alt="White Bear Yacht Club">
-                    </a>
-                    <h2 class="navbar-brand text-light d-none d-md-inline py-0 pl-5 ml-5">Gold Tee Group</h2>
-                </div>
-            </div>
-        </nav>
+        % from HTML import NAV
+        {{!NAV}}
         <div class="content">
             <div class="container">
                 <div class="pt-3 row justify-content-md-center">
@@ -175,25 +164,27 @@ back_9_custom = custom_data['back_9_handicaps']
                     </table>
                 </div>
             </div>
-            <div class="container">
+            <div class="container mt-3 mb-5">
                 <form action="/dataSuccess"
                     method="post"
                     enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="numPlayersSelect">Number of Players:</label>
-                        <select class="form-control col-1" id="numPlayersSelect" name="numPlayersSelect">
-                            % for num in range(1,24):
+                        <select class="form-control col-2" id="numPlayersSelect" name="numPlayersSelect">
+                            % for num in range(1,25):
                             <option value={{num}}>{{num}}</option>
                             % end
                         </select>
                     </div>
+                    <p>Enter 0 or leave blank if you picked up on the hole</p>
                     <div class="form-group">
                         <div class="row">
                             % for num, par in zip(range(1,10), front_9_pars):
-                            % name = "hole" + str(num)
+                            % name = "hole%i".format(num)
                             <div class="col">
-                                <label for="hole1Input">Hole {{num}}</label>
-                                <input type="number" class="form-control" id="hole1Input" placeholder={{par}} name={{name}}>
+                                <label class="d-none d-md-inline" for={{id}}>Hole {{num}}</label>
+                                <label class="d-md-none" for={{id}}>{{num}}</label>
+                                <input type="number" class="form-control" id={{id}} placeholder={{par}} name={{name}} min=0>
                             </div>
                             %end
                         </div>
@@ -201,10 +192,12 @@ back_9_custom = custom_data['back_9_handicaps']
                     <div class="form-group">
                         <div class="row">
                             % for num, par in zip(range(10,19), back_9_pars):
-                            % name = "hole" + str(num)
+                            % name = "hole%i".format(num)
+                            % id = "hole%iInput".format(num)
                             <div class="col">
-                                <label for="hole1Input">Hole {{num}}</label>
-                                <input type="number" class="form-control" id="hole1Input" placeholder={{par}} name={{name}}>
+                                <label class="d-none d-md-inline" for={{id}}>Hole {{num}}</label>
+                                <label class="d-md-none" for={{id}}>{{num}}</label>
+                                <input type="number" class="form-control" id={{id}} placeholder={{par}} name={{name}} min=0>
                             </div>
                             %end
                         </div>
@@ -213,11 +206,8 @@ back_9_custom = custom_data['back_9_handicaps']
                 </form>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <span class="text-light">Copyright ©2020 by <a class="text-light font-weight-bold" href="https://martymammel.com" target="_blank" title="Marty Mammel">Marty Mammel</a> With Permission From <a class="text-light font-weight-bold" href="https://www.wbyc.com/" target="_blank" title="White Bear Yacht Club">White Bear Yacht Club</a>. All Rights Reserved.</span>
-            </div>
-        </footer>
+        % from HTML import FOOTER
+        {{!FOOTER}}
     </div>
 </body>
 </html>
