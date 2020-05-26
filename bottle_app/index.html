@@ -1,8 +1,8 @@
 <%
 import pymongo
-from websiteMongoAuth import connectToDB
+from websiteMongoAuth import connectToDBAllCols
 
-scores, custom_handicaps, pars_handicaps = connectToDB()
+scores, custom_handicaps, pars_handicaps = connectToDBAllCols()
 
 current_data = pars_handicaps.find_one()
 front_9_pars = current_data['front_9_pars']
