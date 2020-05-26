@@ -1,3 +1,7 @@
+.btn-wbyc {
+    background-color: #235A99 !important;
+}
+
 .wbycNav {
     background-color: #38495a;
 }
@@ -20,6 +24,10 @@
     height: 50px;
 }
 
+th, td {
+    text-align: center !important;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -27,7 +35,7 @@
     background-color: #235A99;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 770px) {
     .footer {
         height: 60px;
         line-height: 60px;
