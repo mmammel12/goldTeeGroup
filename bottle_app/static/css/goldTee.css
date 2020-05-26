@@ -1,0 +1,35 @@
+.wbycNav {
+    background-color: #38495a;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content {
+    padding-bottom: 60px;
+}
+
+.logo-full img {
+    padding: 3px 40px 3px 0;
+    border-right: 1px solid white;
+}
+
+.logo-mobile img {
+    height: 50px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #235A99;
+}
+
+@media (min-width: 576px) {
+    .footer {
+        height: 60px;
+        line-height: 60px;
+    }
+}
