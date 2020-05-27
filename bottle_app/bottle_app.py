@@ -17,6 +17,10 @@ def image(filename):
 def home():
     return template("index.html")
 
+@post("/dataSuccess")
+def dataSuccess():
+    return template("dataSuccess.html")
+
 application = default_app()
 
 run(host="localhost", port=8080, debug=True)
