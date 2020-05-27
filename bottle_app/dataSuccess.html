@@ -1,11 +1,61 @@
+<% import pymongo
+from bottle import request
+from websiteMongoAuth import connectToDBScores
+
+scores = connectToDBScores()
+
+
+showSuccess = ""
+showFail = "d-none"
+try:
+    numPlayers = int(request.forms.get("numPlayersSelect"))
+    for playerNum in range(numPlayers):
+        front9Scores = []
+        back9Scores = []
+        playerHandicap = int(request.forms.get("p{0}handicap".format(playerNum)))
+        # TODO change to accomodate numPlayers
+        for holeNum in range(1,10):
+            front9Scores.append(int(request.forms.get("p{0}h{1}".format(playerNum, holeNum))))
+        end
+        for hole in range(10,19):
+            back9Scores.append(int(request.forms.get("p{0}h{1}".format(playerNum, holeNum))))
+        end
+
+        insertData = {"player_handicap": playerHandicap,
+                "front_9_scores": front9Scores,
+                "back_9_scores": back9Scores}
+
+        scores.insert_one(insertData)
+    end
+except:
+    showSuccess = "d-none"
+    showFail = ""
+end
+
+# TODO use JS to redirect
+%>
+
 <!DOCTYPE html>
 <html lang="en">
+<head>
     % from HTML import HEAD
     {{!HEAD}}
+    
+</head>
 <body>
     <div class="page-container">
         % from HTML import NAV
         {{!NAV}}
+        <div class="alert alert-success {{showSuccess}}" role="alert">
+            <h4 class="alert-heading">Success!</h4>
+            <p>The scores have been entered successfully. You will be redirected  shortly.</p>
+            <p class="mb-0">If you are not redirected within 10 seconds, click <a href="/">HERE</a> to return to the Gold Tee Group website or click <a href="wbyc.com">HERE</a> to go the White Bear Yacht Club website</p>
+        </div>
+        <div class="alert alert-danger {{showFail}}" role="alert">
+            <h4 class="alert-heading">Error</h4>
+            <p>An Error Occurred While Attempting To Process Scores</p>
+            <p class="mb-0">Please click <a href="/">HERE</a> to return to the Gold Tee Group website and try again or click <a href="wbyc.com">HERE</a> to go the White Bear Yacht Club website</p>
+        </div>
         % from HTML import FOOTER
         {{!FOOTER}}
     </div>
