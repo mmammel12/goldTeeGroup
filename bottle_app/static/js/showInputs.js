@@ -1,5 +1,6 @@
 $(function() {
     $("#numPlayersSelect").change(function () {
+        // TODO fix undefined
         let numPlayers = $("#numPlayersSelect").val();
         let numInputs = $("#formInputs").children(".players").length;
         console.log(numInputs);
@@ -56,6 +57,7 @@ $(function() {
             numInputs = numPlayers;
         }
         else if (numInputs > numPlayers) {
+            // TODO remove not working
             while (numInputs > numPlayers) {
                 console.log(numInputs);
                 $("#formInputs").remove("#player" + numInputs);
