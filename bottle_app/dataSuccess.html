@@ -13,7 +13,6 @@ try:
         front9Scores = []
         back9Scores = []
         playerHandicap = int(request.forms.get("p{0}handicap".format(playerNum)))
-        # TODO change to accomodate numPlayers
         for holeNum in range(1,10):
             front9Scores.append(int(request.forms.get("p{0}h{1}".format(playerNum, holeNum))))
         end
@@ -40,7 +39,7 @@ end
 <head>
     % from HTML import HEAD
     {{!HEAD}}
-    
+
 </head>
 <body>
     <div class="page-container">
