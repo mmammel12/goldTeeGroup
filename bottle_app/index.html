@@ -14,6 +14,8 @@ custom_data = custom_handicaps.find_one()
 front_9_custom = custom_data['front_9_handicaps']
 back_9_custom = custom_data['back_9_handicaps']
 
+maxPlayers = 24
+
 %>
 
 <!DOCTYPE html>
@@ -174,25 +176,31 @@ back_9_custom = custom_data['back_9_handicaps']
                     <div class="form-group">
                         <label for="numPlayersSelect">Number of Players:</label>
                         <select class="form-control col-2" id="numPlayersSelect" name="numPlayersSelect">
-                            % for num in range(1,25):
-                            <option value={{num}}>{{num}}</option>
+                            % for num in range(maxPlayers):
+                            <option value={{num + 1}}>{{num + 1}}</option>
                             % end
                         </select>
                     </div>
                     <p>Enter 0 or leave blank if the player picked up on the hole</p>
                     <div id="formInputs">
-                        <div id="player0" class="players">
+                        % for playerNum in range(maxPlayers):
+                        % if (playerNum == 0):
+                            % show = ""
+                        % else:
+                            % show = "style=display:none;"
+                        % end
+                        <div id="player{{playerNum}}" class="players" {{show}}>
                             <div class="form-group border rounded p-3">
                                 <div class="row">
                                     <div class="ml-3 mw-25">
-                                        <label for="p0handicap">Player Handicap</label>
+                                        <label for="p{{playerNum}}handicap">Player {{playerNum + 1}} Handicap</label>
                                         <input type="number" class="form-control" id="p0handicap" placeholder=14 name="p0handicap" max=100 min=-20>
                                     </div>
                                 </div>
                                 <div class="row">
                                     % for num, par in zip(range(1,10), front_9_pars):
-                                    % name = "p0h{0}".format(num)
-                                    % id = "p0h{0}Input".format(num)
+                                    % name = "p{0}h{1}".format(playerNum, num)
+                                    % id = "p{0}h{1}Input".format(playerNum, num)
                                     <div class="col">
                                         <label class="d-none d-md-inline" for={{id}}>Hole {{num}}</label>
                                         <label class="d-md-none" for={{id}}>{{num}}</label>
@@ -202,8 +210,8 @@ back_9_custom = custom_data['back_9_handicaps']
                                 </div>
                                 <div class="row">
                                     % for num, par in zip(range(10,19), back_9_pars):
-                                    % name = "p0h{0}".format(num)
-                                    % id = "p0h{0}Input".format(num)
+                                    % name = "p{0}h{1}".format(playerNum, num)
+                                    % id = "p{0}h{1}Input".format(playerNum, num)
                                     <div class="col">
                                         <label class="d-none d-md-inline" for={{id}}>Hole {{num}}</label>
                                         <label class="d-md-none" for={{id}}>{{num}}</label>
@@ -213,6 +221,7 @@ back_9_custom = custom_data['back_9_handicaps']
                                 </div>
                             </div>
                         </div>
+                        % end
                     </div>
                     <button type="submit" class="btn btn-primary btn-wbyc" id="submitBtn">Submit</button>
                 </form>
