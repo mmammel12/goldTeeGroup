@@ -26,7 +26,7 @@ try:
 
         scores.insert_one(insertData)
     end
-except:
+except Exception as e:
     showSuccess = "d-none"
     showFail = ""
 end
@@ -53,6 +53,7 @@ end
         <div class="alert alert-danger {{showFail}}" role="alert">
             <h4 class="alert-heading">Error</h4>
             <p>An Error Occurred While Attempting To Process Scores</p>
+            <p>{{errorMsg}}</p>
             <p class="mb-0">Please click <a href="/">HERE</a> to return to the Gold Tee Group website and try again or click <a href="wbyc.com">HERE</a> to go the White Bear Yacht Club website</p>
         </div>
         % from HTML import FOOTER
