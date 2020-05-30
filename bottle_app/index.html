@@ -194,7 +194,12 @@ maxPlayers = 24
                                 <div class="row">
                                     <div class="ml-3 mw-25">
                                         <label for="p{{playerNum}}handicap">Player {{playerNum + 1}} Handicap</label>
-                                        <input type="number" class="form-control" id="p0handicap" placeholder=14 name="p0handicap" max=100 min=-20>
+                                        % if (playerNum == 0):
+                                            % required = "required"
+                                        % else:
+                                            % required = ""
+                                        % end
+                                        <input type="number" class="form-control" id="p{{playerNum}}handicap" name="p{{playerNum}}handicap" max=100 min=-20 {{required}}>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -204,7 +209,7 @@ maxPlayers = 24
                                     <div class="col">
                                         <label class="d-none d-md-inline" for={{id}}>Hole {{num}}</label>
                                         <label class="d-md-none" for={{id}}>{{num}}</label>
-                                        <input type="number" class="form-control" id={{id}} placeholder={{par}} name={{name}} min=0>
+                                        <input type="number" class="form-control" id={{id}} name={{name}} min=0>
                                     </div>
                                     %end
                                 </div>
@@ -215,7 +220,7 @@ maxPlayers = 24
                                     <div class="col">
                                         <label class="d-none d-md-inline" for={{id}}>Hole {{num}}</label>
                                         <label class="d-md-none" for={{id}}>{{num}}</label>
-                                        <input type="number" class="form-control" id={{id}} placeholder={{par}} name={{name}} min=0>
+                                        <input type="number" class="form-control" id={{id}} name={{name}} min=0>
                                     </div>
                                     %end
                                 </div>
